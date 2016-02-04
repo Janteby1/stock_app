@@ -48,18 +48,10 @@ class Model:
 #####
 
 	def buy_stock(self, userid, acttype, balance):
-		c.execute("""
-			UPDATE acts SET balance = (balance - ?) WHERE userid = ? AND acttype = ?""", (balance, userid, acttype))
-		connection.commit()
-		print ("Funds withdrawn")
-		print("")
-
+		pass
+	
 	def sell_stock(self, userid, acttype, balance):
-		c.execute("""
-			UPDATE acts SET balance = (balance - ?) WHERE userid = ? AND acttype = ?""", (balance, userid, acttype))
-		connection.commit()
-		print ("Funds withdrawn")
-		print("")
+		pass
 
 	def get_portfolio(self, name, username):
 		# first fine user id from his name and username, then use this id to find all the stocks he has
@@ -70,13 +62,7 @@ class Model:
 		connection.commit()
 
 	def admin_view(self, userid, acttype, balance):
-		c.execute("""
-			UPDATE acts SET balance = (balance - ?) WHERE userid = ? AND acttype = ?""", (balance, userid, acttype))
-		connection.commit()
-		print ("Funds withdrawn")
-		print("")
-
-
+		pass
 
 
 
