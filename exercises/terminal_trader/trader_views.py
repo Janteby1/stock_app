@@ -11,3 +11,14 @@ class View ():
 		print ("After creating an account with a username and password you can start building your portfolio!")
 		print ("Buy and sell stocks to try and make a profit.")
 		print ("Lets get started ... ")
+
+	def get_name (self):
+		print ("")
+		while True:
+			name = input ("Welcome! Please enter your name: ")
+			if name.isalpha() == True:
+				break
+			else:
+				self.get_name()
+		return name
+
