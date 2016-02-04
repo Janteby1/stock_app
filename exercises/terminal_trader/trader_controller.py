@@ -8,10 +8,9 @@ class User ():
 	def __init__ (self):
 		self.view = View ()
 		self.name = self.view.get_name()
-		print (self.name)
-		# self.username = username
-		# self.password = password
-
+		self.username = self.view.get_username()
+		self.password = self.view.get_password()
+		self.view.print_login(self.name, self.username)
 
 class Stock ():
 	def __init__ (self):
