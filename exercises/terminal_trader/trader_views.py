@@ -4,7 +4,7 @@ import pudb
 class View ():
 
 	def welcome (self):
-		print ("")
+		print ("Bye")
 		print ("Welcome to the trading game app!")
 		print ("This app allows you to search for a company and get information back about it.")
 		print ("You can search for a stock's live ticker price.")
