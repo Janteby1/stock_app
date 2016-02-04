@@ -4,13 +4,18 @@ import pdb
 class View ():
 
 	def welcome (self):
-		print ("Hello")
+		print ("")
 		print ("Welcome to the trading game app!")
 		print ("This app allows you to search for a company and get information back about it.")
 		print ("You can search for a stock's live ticker price.")
 		print ("After creating an account with a username and password you can start building your portfolio!")
 		print ("Buy and sell stocks to try and make a profit.")
 		print ("Lets get started ... ")
+		print ("")
+
+	def choice_login(self):
+		self.choice = input ("Do you want to sign up [1] or log in [2]?" )
+		return self.choice
 
 	def get_name (self):
 		print ("")
@@ -27,12 +32,14 @@ class View ():
 		self.exchange=exchange
 		self.symbol = symbol
 		print("")
-		print('Name of the company ..{} Exchange..{} and symbol..{}'.format(self.name,self.exchange,self.symbol))
+		print('Name of the company: {}'.format(self.name))
+		print('Exchange: {}'.format(self.exchange))
+		print('symbol: {}'.format(self.symbol))
 
 	def get_username (self):
 		print ("")
 		while True:
-			username = input ("Welcome! Please enter your username: ")
+			username = input ("Please enter a username: ")
 			if username.isalpha() == True:
 				break
 			else:
@@ -42,22 +49,42 @@ class View ():
 	def get_password (self):
 		print ("")
 		while True:
-			password = input ("Welcome! Please enter your password: ")
+			password = input ("Choose a password: ")
 			if password.isalpha() == True:
 				break
 			else:
 				self.get_password()
 		return password
 
-	def print_login (self, name, username):
+	def print_signup (self, name, username):
 		print ("")
 		print ("Welcome ", name)
 		print ("You are currently logged in as: ", username)
 
+	def login_username(self):
+		print ("")
+		self.name = input ("What is your name: ")
+		self.username = input ("Please enter your username: ")
+		return self.username
+
+	def login_password(self):
+		self.password = input ("Enter your password: ")
+		return self.password
+
+	def try_again (self):
+		print ("We coult not find your username or password, please try again")
+
+	def restart(self):
+		print("")
+		print ("Great! You created an act.")
+		print ("Please restart and log back in.")
+		print ("Thank you")
+
 	def get_company (self):
+		# need to fix this input
 		print ("")
 		while True:
-			company = input ("Welcome! Please enter a company: ")
+			company = input ("Please enter a company: ")
 			if company.isalpha() == True:
 				break
 			else:
@@ -67,7 +94,7 @@ class View ():
 	def get_stock (self):
 		print ("")
 		while True:
-			stock = input ("Welcome! Please enter a stock symbol: ")
+			stock = input ("Enter the companies stock symbol: ")
 			if stock.isalpha() == True:
 				break
 			else:
