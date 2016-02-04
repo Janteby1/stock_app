@@ -48,13 +48,14 @@ class Model:
 #####
 
 	def buy_stock(self, userid, acttype, balance):
+		"Need to change the value of the balance in the user table then create the stock add the stock to his FK"
 		pass
 	
 	def sell_stock(self, userid, acttype, balance):
 		pass
 
 	def get_portfolio(self, name, username):
-		# first fine user id from his name and username, then use this id to find all the stocks he has
+		"first fine user id from his name and username, then use this id to find all the stocks he has"
 		portfolio = []
 		c.execute("""
 			SELECT * FROM stock where userid =(SELECT id FROM user WHERE name = ? AND username = ?"""), (name, username))
@@ -62,6 +63,7 @@ class Model:
 		connection.commit()
 
 	def admin_view(self, userid, acttype, balance):
+		"Need to select all stocks from all users, ordered by user name"
 		pass
 
 
