@@ -22,6 +22,31 @@ class View ():
 				self.get_name()
 		return name
 
+	def get_username (self):
+		print ("")
+		while True:
+			username = input ("Welcome! Please enter your username: ")
+			if username.isalpha() == True:
+				break
+			else:
+				self.get_username()
+		return username
+
+	def get_password (self):
+		print ("")
+		while True:
+			password = input ("Welcome! Please enter your password: ")
+			if password.isalpha() == True:
+				break
+			else:
+				self.get_name()
+		return password
+
+	def print_login (self, name, username):
+		print ("")
+		print ("Welcome ", name)
+		print ("You are currently logged in as: ", username)
+
 	def get_stock (self):
 		print ("")
 		while True:
