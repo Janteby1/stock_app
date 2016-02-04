@@ -46,13 +46,23 @@ class View ():
 			if password.isalpha() == True:
 				break
 			else:
-				self.get_name()
+				self.get_password()
 		return password
 
 	def print_login (self, name, username):
 		print ("")
 		print ("Welcome ", name)
 		print ("You are currently logged in as: ", username)
+
+	def get_company (self):
+		print ("")
+		while True:
+			company = input ("Welcome! Please enter a company: ")
+			if company.isalpha() == True:
+				break
+			else:
+				self.get_company()
+		return company
 
 	def get_stock (self):
 		print ("")
