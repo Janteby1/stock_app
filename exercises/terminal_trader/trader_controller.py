@@ -1,15 +1,8 @@
 import sys
-<<<<<<< HEAD
 import pdb
 from trader_views import *
 from trader_models import *
 # from trader_models.py import Model
-=======
-import pudb
-
-from trader_views import View
-from trader_models import Model
->>>>>>> master
 
 class User ():
 	def __init__ (self):
@@ -20,55 +13,31 @@ class User ():
 		self.view.print_login(self.name, self.username)
 
 class Stock ():
-<<<<<<< HEAD
-	def __init__(self,name):
-		self.name=name
-
-	
-=======
 	def __init__ (self):
 		self.view = View ()
 		self.model = Model()
-		self.stock = self.view.get_stock()
+		self.company = self.view.get_company()
+
+	def get_company_info (self):
+		response = self.model.search_company(self.company)
+		dictt = response[0]
+		self.view.company_info(dictt['Name'],dictt['Exchange'],dictt['Symbol'])
 
 	def get_stock_quote (self):
+		self.stock = self.view.get_stock()
 		stock_info = self.model.stock_info(self.stock)
 		self.view.stock_quote(stock_info)
->>>>>>> master
 
 
 # class Run():
 # 	def __init__ (self):
 
-<<<<<<< HEAD
-
-
-#class Run():
-#	def __init__ (self):
-
-#	def __repr__ (self):
-#		return str(self.value)
-
-#	def welcome (self):
-#		"Print a welcome statement"
-#		self.view.welcome()
-
-name='Apple'
-mystock = Stock(name)
-myapi = Api(name)
-response = myapi.search_company()
-dictt = response[0]
-View.company_info(dictt['Name'],dictt['Exchange'],dictt['Symbol'])
-=======
-# 	def __repr__ (self):
-# 		return str(self.value)
-
-# 	def welcome (self):
-# 		"Print a welcome statement"
-# 		self.view.welcome()
+# name='Apple'
+# mystock = Stock(name)
+# myapi = Api(name)
 
 user1 = User()
 appl = Stock()
+appl.get_company_info()	
 appl.get_stock_quote()
 
->>>>>>> master
