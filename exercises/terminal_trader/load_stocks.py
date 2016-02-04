@@ -1,9 +1,12 @@
+import sqlite3
+
 class database:
 	def __init__(self):
 		self.dbname = 'stocks.db'
-		self.conn = sqlite3.connect('stocks.db')
+		
 
 	def insert_stock_data(self,name,buy_price,num,user_id):
+		self.conn = sqlite3.connect('stocks.db')
 		self.name=name
 		self.buy_price=buy_price
 		self.num=num
@@ -11,15 +14,16 @@ class database:
 
 		self.conn.execute(
 	    """
-	    INSERT INTO stocks ("name","buyprice","num","user_id") VALUES(?,?,?,?)
+	    INSERT INTO stock ("stockName","buyPrice","num","userid") VALUES(?,?,?,?)
 	    
 	    """,(self.name,self.buy_price,self.num,self.user_id)
 		)
 
 		self.conn.commit()
-		conn.close()
+		self.conn.close()
 
 
+mydb = database()
 with open('stocks.csv') as fp:
 		for line in fp:
 			line.rstrip()

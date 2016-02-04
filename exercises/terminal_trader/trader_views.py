@@ -1,5 +1,5 @@
 import sys
-import pudb
+import pdb
 
 class View ():
 
@@ -21,6 +21,13 @@ class View ():
 			else:
 				self.get_name()
 		return name
+
+	def company_info(self,name,exchange,symbol):
+		self.name=name
+		self.exchange=exchange
+		self.symbol = symbol
+		print("")
+		print('Name of the company ..{} Exchange..{} and symbol..{}'.format(self.name,self.exchange,self.symbol))
 
 	def get_username (self):
 		print ("")
