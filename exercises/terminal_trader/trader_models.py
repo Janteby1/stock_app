@@ -45,4 +45,43 @@ class Model:
 		connection.commit()
 		return info_list.fetchone() 
 
+#####
+
+	def buy_stock(self, userid, acttype, balance):
+		c.execute("""
+			UPDATE acts SET balance = (balance - ?) WHERE userid = ? AND acttype = ?""", (balance, userid, acttype))
+		connection.commit()
+		print ("Funds withdrawn")
+		print("")
+
+	def sell_stock(self, userid, acttype, balance):
+		c.execute("""
+			UPDATE acts SET balance = (balance - ?) WHERE userid = ? AND acttype = ?""", (balance, userid, acttype))
+		connection.commit()
+		print ("Funds withdrawn")
+		print("")
+
+	def get_portfolio(self, name, username):
+		# first fine user id from his name and username, then use this id to find all the stocks he has
+		portfolio = []
+		c.execute("""
+			SELECT * FROM stock where userid =(SELECT id FROM user WHERE name = ? AND username = ?"""), (name, username))
+		return portfolio.fetchall() 
+		connection.commit()
+
+	def admin_view(self, userid, acttype, balance):
+		c.execute("""
+			UPDATE acts SET balance = (balance - ?) WHERE userid = ? AND acttype = ?""", (balance, userid, acttype))
+		connection.commit()
+		print ("Funds withdrawn")
+		print("")
+
+
+
+
+
+
+
+
+
 	

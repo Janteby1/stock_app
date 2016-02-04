@@ -117,4 +117,6 @@ class View ():
 		print ("ChangeYTD: ", stock_info["ChangeYTD"])
 		print ("")
 
+	def print_portfolio (self, portfolio):
+		print ("Portfolio: ", portfolio)
 
