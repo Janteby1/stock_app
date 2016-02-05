@@ -41,9 +41,30 @@ class Model:
 	def check_login(self, username, password):
 		info_list = []
 		info_list = c.execute("""
-			SELECT id FROM users WHERE username = ? AND password = ?""", (username, password))
+			SELECT * FROM users WHERE username = ? AND password = ?""", (username, password))
 		connection.commit()
-		return info_list.fetchone() 
+		#return info_list.fetchone()
+		return(info_list.fetchall()) 
+
+	def buy_stock(self,stock,lastprice,num,userid,new_balance):
+		self.stock=stock
+		self.lastprice=lastprice
+		self.num=num
+		self.userid=userid
+		self.new_balance=new_balance
+		print('LastPrice  ',self.lastprice, '  ','user id ..',self.userid )
+
+		c.execute("""
+			INSERT INTO stock ("stockName","buyPrice","num","userid") VALUES(?,?,?,?)
+	    
+	    """,(self.stock,self.lastprice,self.num,self.userid)
+		)
+
+		c.execute("""
+			UPDATE users SET balance=? WHERE id=?""",(self.new_balance, self.userid)
+		)
+		connection.commit()
+		connection.close()
 
 	def buy_stock(self, userid, acttype, balance):
 		"Need to change the value of the balance in the user table then create the stock add the stock to his FK"
