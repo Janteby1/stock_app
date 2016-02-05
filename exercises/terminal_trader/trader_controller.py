@@ -29,13 +29,13 @@ class User():
 		sys.exit()
 
 	def login (self):
-		username = self.view.login_username()
-		password = self.view.login_password()
-		self.info_list = self.model.check_login (username, password)
+		self.username = self.view.login_username()
+		self.password = self.view.login_password()
+		self.info_list = self.model.check_login (self.username, self.password)
 		if self.info_list is not None:
 			print ("")
 			print ("Welcome back to the stock trading game!")
-			balance = self.model.get_balance(username, password)
+			balance = self.model.get_balance(self.username, self.password)
 			print ("Your current balance is: ", balance, "dollars.")
 		else:
 			self.view.try_again()
@@ -60,8 +60,7 @@ class User():
 			self.choose_option()
 
 	def get_portfolio (self):
-		# get the users name and username and pass it to the check_balance function
-		portfolio = self.model.check_balance('''---''')
+		portfolio = self.model.get_portfolio(self.username, self.password)
 		self.view.print_portfolio(portfolio)
 		self.choose_option()
 

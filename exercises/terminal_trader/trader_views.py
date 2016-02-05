@@ -131,7 +131,7 @@ class View ():
 
 	def get_symbol(self):
 		print ("")
-		symbol = input("Enter the ticker symbol of the company you would you like to buy: ")
+		symbol = input("Enter the ticker symbol of the company you would you like to buy or sell: ")
 		return(symbol)
 
 	def get_num_shares(self):
@@ -142,7 +142,6 @@ class View ():
 	def get_num_shares_to_sell(self):
 		num = input("How many shares would you like to sell? ")
 		return(num)
-
 
 	def print_portfolio (self, portfolio):
 		print ("Portfolio: ", portfolio)
