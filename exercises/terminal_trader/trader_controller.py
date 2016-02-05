@@ -4,7 +4,7 @@ from trader_views import *
 from trader_models import *
 # from trader_models.py import Model
 
-class User ():
+class User():
 	def __init__ (self):
 		self.view = View ()
 		self.model = Model()
@@ -42,10 +42,10 @@ class User ():
 
 	def get_portfolio (self):
 		# get the users name and username and pass it to the check_balance function
-		portfolio = self.model.check_balance()
+		portfolio = self.model.check_balance('''---''')
 		self.view.print_portfolio(portfolio)
 
-class Stock ():
+class Stock():
 	def __init__ (self):
 		self.view = View ()
 		self.model = Model()
@@ -64,8 +64,13 @@ class Stock ():
 	def buy_stocks (self):
 		num = self.view.get_num_shares()
 		total_price_of_shares = int(num) * int(self.stock_info['LastPrice'])
-		new_balance = int(user1.info_list[0][4]) - total_price_of_shares
-		self.model.buy_stock(self.stock_info['Name'],self.stock_info['LastPrice'],num,user1.info_list[0][0],new_balance)
+		if user1.info_list[0][4] == None:
+			print ("Sorry! You are currently out of funds.")
+			print ("")
+		else:
+			new_balance = int(user1.info_list[0][4]) - total_price_of_shares
+			self.model.buy_stock(self.stock_info['Name'],self.stock_info['LastPrice'],num,user1.info_list[0][0],new_balance)
+
 
 
 # class Run():
@@ -81,3 +86,5 @@ appl = Stock()
 appl.get_company_info()	
 appl.get_stock_quote()
 appl.buy_stocks()
+appl.sell_stocks()
+
