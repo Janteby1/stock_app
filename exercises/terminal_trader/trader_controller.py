@@ -95,7 +95,7 @@ class Stock():
 	def sell_stocks(self):
 		symbol = self.view.get_symbol()
 		num = self.view.get_num_shares_to_sell()
-		self.model.sell.stock(symbol,user1.info_list[0][0],self.stock_info['Name'],num)
+		self.model.sell_stock(symbol,num,user1.info_list[0][0])
 
 user1 = User()
 user1.choice_login()
