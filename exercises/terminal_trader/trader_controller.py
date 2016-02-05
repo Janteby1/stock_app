@@ -88,9 +88,8 @@ class Stock():
 			print ("Sorry! You are currently out of funds.")
 			print ("")
 		else:
-<<<<<<< HEAD
-			new_balance = int(user1.info_list[0][4]) - total_price_of_shares
-			self.model.buy_stock(self.stock_info['Name'],self.stock_info['LastPrice'],num,user1.info_list[0][0],new_balance)
+			self.model.buy_stock(symbol, num, user1.info_list[0][0])
+			user1.choose_option()
 
 	def sell_stocks(self):
 		num = self.view.get_num_shares_to_sell()
@@ -100,10 +99,8 @@ class Stock():
 
 
 
-=======
-			self.model.buy_stock(symbol, num, user1.info_list[0][0])
-		user1.choose_option()
->>>>>>> 8920bebfc1adbe537e256701b71acf0b973f1b30
+		
+		
 
 
 # class Run():

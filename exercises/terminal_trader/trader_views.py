@@ -135,12 +135,8 @@ class View ():
 		return(symbol)
 
 	def get_num_shares(self):
-<<<<<<< HEAD
-		num = input("How many shares would you like to buy? ")
-=======
 		print ("")
 		num = input("How many shares would you like to buy: ")
->>>>>>> 8920bebfc1adbe537e256701b71acf0b973f1b30
 		return(num)
 
 	def get_num_shares_to_sell(self):
