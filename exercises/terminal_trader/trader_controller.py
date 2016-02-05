@@ -1,7 +1,7 @@
 import sys
 import pdb
 from trader_views import *
-from trader_models import Model, Admin
+from trader_models import *
 # from trader_models.py import Model
 
 class User():
