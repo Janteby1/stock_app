@@ -34,7 +34,7 @@ class View ():
 		print("")
 		print('Name of the company: {}'.format(self.name))
 		print('Exchange: {}'.format(self.exchange))
-		print('symbol: {}'.format(self.symbol))
+		print('Symbol: {}'.format(self.symbol))
 
 	def get_username (self):
 		print ("")
@@ -76,7 +76,7 @@ class View ():
 
 	def restart(self):
 		print("")
-		print ("Great! You created an act.")
+		print ("Great! You created an account.")
 		print ("Please restart and log back in.")
 		print ("Thank you")
 
@@ -119,4 +119,3 @@ class View ():
 
 	def print_portfolio (self, portfolio):
 		print ("Portfolio: ", portfolio)
-
