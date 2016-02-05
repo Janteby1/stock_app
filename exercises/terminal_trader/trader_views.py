@@ -117,5 +117,9 @@ class View ():
 		print ("ChangeYTD: ", stock_info["ChangeYTD"])
 		print ("")
 
+	def get_num_shares(self):
+		num = input("How many shares would you like to buy ")
+		return(num)
+
 	def print_portfolio (self, portfolio):
 		print ("Portfolio: ", portfolio)
