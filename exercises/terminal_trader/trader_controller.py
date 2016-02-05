@@ -42,7 +42,7 @@ class User ():
 
 	def get_portfolio (self):
 		# get the users name and username and pass it to the check_balance function
-		portfolio = self.model.check_balance()
+		portfolio = self.model.check_balance(####)
 		self.view.print_portfolio(portfolio)
 
 class Stock ():
