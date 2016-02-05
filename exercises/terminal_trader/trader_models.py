@@ -1,5 +1,3 @@
-<<<<<<< refs/remotes/origin/shihmei
-=======
 import sqlite3
 import requests
 import pdb
@@ -98,12 +96,3 @@ class Model:
 	def admin_view(self, userid, acttype, balance):
 		"Need to select all stocks from all users, ordered by user name"
 		pass
-
-
-
-
-
-
-
-	
->>>>>>> local

@@ -1,16 +1,21 @@
 import sys
-import pudb
+import pdb
 
 class View ():
 
 	def welcome (self):
-		print ("Hello")
+		print ("")
 		print ("Welcome to the trading game app!")
 		print ("This app allows you to search for a company and get information back about it.")
 		print ("You can search for a stock's live ticker price.")
 		print ("After creating an account with a username and password you can start building your portfolio!")
 		print ("Buy and sell stocks to try and make a profit.")
 		print ("Lets get started ... ")
+		print ("")
+
+	def choice_login(self):
+		self.choice = input ("Do you want to sign up [1] or log in [2]?" )
+		return self.choice
 
 	def get_name (self):
 		print ("")
@@ -22,8 +27,6 @@ class View ():
 				self.get_name()
 		return name
 
-<<<<<<< refs/remotes/origin/shihmei
-=======
 	def company_info(self,name,exchange,symbol):
 		self.name=name
 		self.exchange=exchange
@@ -116,5 +119,3 @@ class View ():
 
 	def print_portfolio (self, portfolio):
 		print ("Portfolio: ", portfolio)
-
->>>>>>> local

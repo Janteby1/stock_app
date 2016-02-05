@@ -11,7 +11,7 @@ connection.execute(
 )
 connection.execute(
     """
-    DROP TABLE IF EXISTS stocks;
+    DROP TABLE IF EXISTS stock;
     """
 )
 
