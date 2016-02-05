@@ -80,6 +80,18 @@ class View ():
 		print ("Please restart and log back in.")
 		print ("Thank you")
 
+	def choose_option(self):
+		print ("")
+		print("What would you like to do?: ")
+		print ("1. View a company stock price and live stock_quote ")
+		print ("2. Buy a stock ")
+		print ("3. Sell your stock ")
+		print ("4. View your portfolio ")
+		print ("5. Quit ")
+		print ("")
+		choice = input ("Enter the number of your choice: ")
+		return choice
+
 	def get_company (self):
 		# need to fix this input
 		print ("")
@@ -118,7 +130,8 @@ class View ():
 		print ("")
 
 	def get_num_shares(self):
-		num = input("How many shares would you like to buy ")
+		print ("")
+		num = input("How many shares would you like to buy: ")
 		return(num)
 
 	def print_portfolio (self, portfolio):
