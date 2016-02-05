@@ -56,7 +56,7 @@ class Model:
         info_list = self.stock_info(symbol)
 
         self.lastprice=info_list["LastPrice"]
-        print('butPrice  ',self.lastprice, '  ','user id ..',self.userid )
+        print('buy Price  ',self.lastprice, '  ','user id ..',self.userid )
 
         total_price_of_shares = int(num) * int(self.lastprice)
 
@@ -73,18 +73,30 @@ class Model:
         connection.commit()
         connection.close()
     
-    def sell_stock(self, userid, stock_name, quantity):
+    def sell_stock(self, symbol,quantity,userid):
+        self.symbol= symbol
+        self.quantity=quantity
+        self.userid=userid
+
+        info_list = []
+        info_list = self.stock_info(self.symbol)
+        self.lastprice=info_list["LastPrice"]
+        print('Sell price', self.lastprice, ' ', 'user id..', self.userid )
+        total_revenue = int(num) * int(self.lastprice)
+
+
         c.execute(
             """
             SELECT id, buyPrice, num
             FROM stock
             WHERE stockname = ? AND userid = ?""",
-            (stockName, userid))
-        available_stock = c.fetchone()
+            (self.symbol, self.userid))
+        available_stock = c.fetchall()
         if available_stock == []:
             print("You do not have this stock")
-        stock_id, price, on_hand = available_stock
-        if quantity > on_hand:
+        else:
+            stock_id, price, on_hand = available_stock
+        if self.quantity > on_hand:
             print("Not enough stock available!")
             return
 
@@ -93,10 +105,10 @@ class Model:
             UPDATE stock
             SET num = num - ?
             WHERE id = ?""",
-            (quanity, stock_id))
+            (self.quanity, stock_id))
         connection.commit()
 
-        revenue = price * quality
+        revenue = price * self.quantity
         print("Stock sell sucessesful."
               "You have gained {}".format(revenue))
 
@@ -105,7 +117,7 @@ class Model:
             UPDATE users
             SET balance = balance + ?
             WHERE id = ?""",
-            (revenue, userid))
+            (revenue, self.userid))
         connection.commit()
         return revenue
 
