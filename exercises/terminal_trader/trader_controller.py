@@ -71,6 +71,14 @@ class Stock():
 			new_balance = int(user1.info_list[0][4]) - total_price_of_shares
 			self.model.buy_stock(self.stock_info['Name'],self.stock_info['LastPrice'],num,user1.info_list[0][0],new_balance)
 
+	def sell_stocks(self):
+		num = self.view.get_num_shares_to_sell()
+		self.model.sell.stock(user1.info_list[0][0],self.stock_info['Name'],num)
+
+
+
+
+
 
 
 # class Run():

@@ -118,8 +118,13 @@ class View ():
 		print ("")
 
 	def get_num_shares(self):
-		num = input("How many shares would you like to buy ")
+		num = input("How many shares would you like to buy? ")
 		return(num)
+
+	def get_num_shares_to_sell(self):
+		num = input("How many shares would you like to sell? ")
+		return(num)
+
 
 	def print_portfolio (self, portfolio):
 		print ("Portfolio: ", portfolio)
