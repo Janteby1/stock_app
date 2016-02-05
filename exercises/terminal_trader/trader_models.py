@@ -46,24 +46,30 @@ class Model:
         #return info_list.fetchone()
         return(info_list.fetchall()) 
 
-    def buy_stock(self,stock,lastprice,num,userid,new_balance):
+    def buy_stock(self,symbol,num,userid):
         "Need to change the value of the balance in the user table then create the stock add the stock to his FK"
-        self.stock=stock
-        self.lastprice=lastprice
+        self.symbol=symbol
         self.num=num
         self.userid=userid
-        self.new_balance=new_balance
-        print('LastPrice  ',self.lastprice, '  ','user id ..',self.userid )
+
+        info_list =[]
+        info_list = self.stock_info(symbol)
+
+        self.lastprice=info_list["LastPrice"]
+        print('butPrice  ',self.lastprice, '  ','user id ..',self.userid )
+
+        total_price_of_shares = int(num) * int(self.lastprice)
 
         c.execute("""
             INSERT INTO stock ("stockName","buyPrice","num","userid") VALUES(?,?,?,?)
         
-        """,(self.stock,self.lastprice,self.num,self.userid)
+        """,(self.symbol,self.lastprice,self.num,self.userid)
         )
 
         c.execute("""
-            UPDATE users SET balance=? WHERE id=?""",(self.new_balance, self.userid)
+            UPDATE users SET balance=balance - ? WHERE id=?""",(total_price_of_shares, self.userid)
         )
+        print ("Your purchase ahs went through")
         connection.commit()
         connection.close()
     

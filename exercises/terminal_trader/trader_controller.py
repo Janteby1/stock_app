@@ -40,18 +40,37 @@ class User():
 			sys.exit()
 			# need to get this to loop
 
+	def choose_option (self):
+		choice = self.view.choose_option()
+		if choice == "1":
+			stock.get_company_info()	
+			stock.get_stock_quote()
+		elif choice == "2":
+			stock.buy_stocks()
+		elif choice == "3":
+			stock.sell_stocks()
+		elif choice == "4":
+			self.get_portfolio()
+		elif choice == "5":
+			print ("Goodbye.")
+			sys.exit()
+		else:
+			print ("Please enter a valid choice. (1, 2, 3 or 4) ")
+			self.choose_option()
+
 	def get_portfolio (self):
 		# get the users name and username and pass it to the check_balance function
 		portfolio = self.model.check_balance('''---''')
 		self.view.print_portfolio(portfolio)
+		self.choose_option()
 
 class Stock():
 	def __init__ (self):
 		self.view = View ()
 		self.model = Model()
-		self.company = self.view.get_company()
 
 	def get_company_info (self):
+		self.company = self.view.get_company()
 		response = self.model.search_company(self.company)
 		dictt = response[0]
 		self.view.company_info(dictt['Name'],dictt['Exchange'],dictt['Symbol'])
@@ -60,14 +79,16 @@ class Stock():
 		self.stock = self.view.get_stock()
 		self.stock_info = self.model.stock_info(self.stock)
 		self.view.stock_quote(self.stock_info)
+		user1.choose_option()
 
 	def buy_stocks (self):
+		symbol = self.view.get_symbol()
 		num = self.view.get_num_shares()
-		total_price_of_shares = int(num) * int(self.stock_info['LastPrice'])
 		if user1.info_list[0][4] == None:
 			print ("Sorry! You are currently out of funds.")
 			print ("")
 		else:
+<<<<<<< HEAD
 			new_balance = int(user1.info_list[0][4]) - total_price_of_shares
 			self.model.buy_stock(self.stock_info['Name'],self.stock_info['LastPrice'],num,user1.info_list[0][0],new_balance)
 
@@ -79,6 +100,10 @@ class Stock():
 
 
 
+=======
+			self.model.buy_stock(symbol, num, user1.info_list[0][0])
+		user1.choose_option()
+>>>>>>> 8920bebfc1adbe537e256701b71acf0b973f1b30
 
 
 # class Run():
@@ -90,9 +115,11 @@ class Stock():
 
 user1 = User()
 user1.choice_login()
-appl = Stock()
-appl.get_company_info()	
-appl.get_stock_quote()
-appl.buy_stocks()
-appl.sell_stocks()
+stock = Stock()
+user1.choose_option()
+
+# stock.get_company_info()	
+# stock.get_stock_quote()
+# stock.buy_stocks()
+# stock.sell_stocks()
 

@@ -80,6 +80,18 @@ class View ():
 		print ("Please restart and log back in.")
 		print ("Thank you")
 
+	def choose_option(self):
+		print ("")
+		print("What would you like to do?: ")
+		print ("1. View a company stock price and live stock_quote ")
+		print ("2. Buy a stock ")
+		print ("3. Sell your stock ")
+		print ("4. View your portfolio ")
+		print ("5. Quit ")
+		print ("")
+		choice = input ("Enter the number of your choice: ")
+		return choice
+
 	def get_company (self):
 		# need to fix this input
 		print ("")
@@ -117,8 +129,18 @@ class View ():
 		print ("ChangeYTD: ", stock_info["ChangeYTD"])
 		print ("")
 
+	def get_symbol(self):
+		print ("")
+		symbol = input("Enter the ticker symbol of the company you would you like to buy: ")
+		return(symbol)
+
 	def get_num_shares(self):
+<<<<<<< HEAD
 		num = input("How many shares would you like to buy? ")
+=======
+		print ("")
+		num = input("How many shares would you like to buy: ")
+>>>>>>> 8920bebfc1adbe537e256701b71acf0b973f1b30
 		return(num)
 
 	def get_num_shares_to_sell(self):
