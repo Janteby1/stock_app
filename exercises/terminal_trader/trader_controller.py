@@ -2,7 +2,6 @@ import sys
 import pdb
 from trader_views import *
 from trader_models import *
-# from trader_models.py import Model
 
 class User():
 	def __init__ (self):
@@ -24,7 +23,6 @@ class User():
 		username = self.view.get_username()
 		password = self.view.get_password()
 		balance = 10000.00
-		# self.view.print_signup(self.name, self.username)
 		"send the values to the db"
 		self.model.create_user(name, username, password, balance)
 		self.view.restart()
@@ -42,7 +40,6 @@ class User():
 		else:
 			self.view.try_again()
 			sys.exit()
-			# need to get this to loop
 
 	def choose_option (self):
 		choice = self.view.choose_option()
@@ -100,28 +97,7 @@ class Stock():
 		num = self.view.get_num_shares_to_sell()
 		self.model.sell.stock(symbol,user1.info_list[0][0],self.stock_info['Name'],num)
 
-
-
-
-
-		
-		
-
-
-# class Run():
-# 	def __init__ (self):
-
-# name='Apple'
-# mystock = Stock(name)
-# myapi = Api(name)
-
 user1 = User()
 user1.choice_login()
 stock = Stock()
 user1.choose_option()
-
-# stock.get_company_info()	
-# stock.get_stock_quote()
-# stock.buy_stocks()
-# stock.sell_stocks()
-

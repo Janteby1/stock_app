@@ -7,10 +7,6 @@ connection = sqlite3.connect(db)
 c = connection.cursor()
 
 class Model:
-    # def __init__(self):
-        # self.stock_name=name
-        #self.apiname = 'http://dev.markitondemand.com/MODApis/#doc_lookup'
-
     def search_company(self, company):
         ''' get company information'''
         stock_company = requests.get("http://dev.markitondemand.com/Api/v2/Lookup/json?input=%s" % (company)).json() 
