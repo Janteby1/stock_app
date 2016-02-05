@@ -40,6 +40,11 @@ class User ():
 			sys.exit()
 			# need to get this to loop
 
+	def get_portfolio (self):
+		# get the users name and username and pass it to the check_balance function
+		portfolio = self.model.check_balance()
+		self.view.print_portfolio(portfolio)
+
 class Stock ():
 	def __init__ (self):
 		self.view = View ()

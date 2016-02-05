@@ -66,4 +66,54 @@ class Model:
 		connection.commit()
 		connection.close()
 
+	def buy_stock(self, userid, acttype, balance):
+		"Need to change the value of the balance in the user table then create the stock add the stock to his FK"
+		pass
 	
+	def sell_stock(self, userid, stock_name, quantity):
+        c.execute(
+            """
+            SELECT id, buyPrice, num
+            FROM stock
+            WHERE stockname = ? AND userid = ?""",
+            (stockName, userid))
+        available_stock = c.fetchone()
+        if available_stock == []:
+            print("You do not have this stock")
+        stock_id, price, on_hand = available_stock
+        if quantity > on_hand:
+            print("Not enough stock available!")
+            return
+
+        c.execute(
+            """
+            UPDATE stock
+            SET num = num - ?
+            WHERE id = ?""",
+            (quanity, stock_id))
+        connection.commit()
+
+        revenue = price * quality
+        print("Stock sell sucessesful."
+              "You have gained {}".format(revenue))
+
+        c.execute(
+            """
+            UPDATE users
+            SET balance = balance + ?
+            WHERE id = ?""",
+            (revenue, userid))
+        connection.commit()
+        return revenue
+
+	def get_portfolio(self, name, username):
+		"first fine user id from his name and username, then use this id to find all the stocks he has"
+		portfolio = []
+		c.execute("""
+			SELECT * FROM stock where userid =(SELECT id FROM user WHERE name = ? AND username = ?"""), (name, username))
+		return portfolio.fetchall() 
+		connection.commit()
+
+	def admin_view(self, userid, acttype, balance):
+		"Need to select all stocks from all users, ordered by user name"
+		pass
