@@ -20,9 +20,9 @@ class Model:
         stock_info = requests.get("http://dev.markitondemand.com/Api/v2/Quote/json?symbol=%s" %(stock)).json()
         return stock_info
 
-    def create_user(self, name, username, password):
+    def create_user(self, name, username, password, balance):
         c.execute("""
-            INSERT INTO users ("name", "username", "password") VALUES (?, ?, ?)""",(name, username, password))
+            INSERT INTO users ("name", "username", "password", "balance") VALUES (?, ?, ?, ?)""",(name, username, password, balance))
         connection.commit()
 
     def print_user(self):
@@ -43,8 +43,13 @@ class Model:
         info_list = c.execute("""
             SELECT * FROM users WHERE username = ? AND password = ?""", (username, password))
         connection.commit()
-        #return info_list.fetchone()
         return(info_list.fetchall()) 
+
+    def get_balance(self, username, password):
+        balance = c.execute("""
+            SELECT balance FROM users WHERE username = ? AND password = ?""", (username, password))
+        connection.commit()
+        return balance.fetchone()
 
     def buy_stock(self,symbol,num,userid):
         "Need to change the value of the balance in the user table then create the stock add the stock to his FK"

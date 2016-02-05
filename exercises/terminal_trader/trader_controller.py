@@ -23,9 +23,10 @@ class User():
 		name = self.view.get_name()
 		username = self.view.get_username()
 		password = self.view.get_password()
+		balance = 10000.00
 		# self.view.print_signup(self.name, self.username)
 		"send the values to the db"
-		self.model.create_user(name, username, password)
+		self.model.create_user(name, username, password, balance)
 		self.view.restart()
 		sys.exit()
 
@@ -34,7 +35,10 @@ class User():
 		password = self.view.login_password()
 		self.info_list = self.model.check_login (username, password)
 		if self.info_list is not None:
+			print ("")
 			print ("Welcome back to the stock trading game!")
+			balance = self.model.get_balance(username, password)
+			print ("Your current balance is: ", balance, "dollars.")
 		else:
 			self.view.try_again()
 			sys.exit()
