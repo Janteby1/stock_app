@@ -132,3 +132,25 @@ class Model:
     def admin_view(self, userid, acttype, balance):
         "Need to select all stocks from all users, ordered by user name"
         pass
+
+class Admin():
+
+    def __init__ (self):
+        print("we are here")
+
+    def view_all (self):
+        c.execute(
+        """
+        SELECT name, balance
+        FROM users
+        ORDER BY balance DESC
+        """)
+        return c.fetchall()
+
+
+
+
+
+
+
+

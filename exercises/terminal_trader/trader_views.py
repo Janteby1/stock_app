@@ -14,7 +14,7 @@ class View ():
 		print ("")
 
 	def choice_login(self):
-		self.choice = input ("Do you want to sign up [1] or log in [2]?" )
+		self.choice = input ("Do you want to sign up [1] log in [2] or log in as a admin [3]?" )
 		return self.choice
 
 	def get_name (self):
@@ -60,6 +60,13 @@ class View ():
 		print ("")
 		print ("Welcome ", name)
 		print ("You are currently logged in as: ", username)
+
+	def admin_login(self):
+		print("")
+		print("Enter your admin login and userid: ")
+		self.name = input("Login: ")
+		self.pwd = input("Password: ")
+		return (self.name, self.pwd)
 
 	def login_username(self):
 		print ("")
