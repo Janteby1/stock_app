@@ -32,8 +32,8 @@ class User ():
 	def login (self):
 		username = self.view.login_username()
 		password = self.view.login_password()
-		info_list = self.model.check_login (username, password)
-		if info_list is not None:
+		self.info_list = self.model.check_login (username, password)
+		if self.info_list is not None:
 			print ("Welcome back to the stock trading game!")
 		else:
 			self.view.try_again()
@@ -56,6 +56,12 @@ class Stock ():
 		self.stock_info = self.model.stock_info(self.stock)
 		self.view.stock_quote(self.stock_info)
 
+	def buy_stocks (self):
+		num = self.view.get_num_shares()
+		total_price_of_shares = int(num) * int(self.stock_info['LastPrice'])
+		new_balance = int(user1.info_list[0][4]) - total_price_of_shares
+		self.model.buy_stock(self.stock_info['Name'],self.stock_info['LastPrice'],num,user1.info_list[0][0],new_balance)
+
 
 # class Run():
 # 	def __init__ (self):
@@ -69,4 +75,4 @@ user1.choice_login()
 appl = Stock()
 appl.get_company_info()	
 appl.get_stock_quote()
-
+appl.buy_stocks()
