@@ -129,6 +129,11 @@ class View ():
 		print ("ChangeYTD: ", stock_info["ChangeYTD"])
 		print ("")
 
+	def get_symbol(self):
+		print ("")
+		symbol = input("Enter the ticker symbol of the company you would you like to buy: ")
+		return(symbol)
+
 	def get_num_shares(self):
 		print ("")
 		num = input("How many shares would you like to buy: ")
