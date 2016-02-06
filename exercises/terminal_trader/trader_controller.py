@@ -2,7 +2,6 @@ import sys
 import pdb
 from trader_views import *
 from trader_models import *
-# from trader_models.py import Model
 
 class User():
 	def __init__ (self):
@@ -31,22 +30,24 @@ class User():
 		name = self.view.get_name()
 		username = self.view.get_username()
 		password = self.view.get_password()
-		# self.view.print_signup(self.name, self.username)
+		balance = 10000.00
 		"send the values to the db"
-		self.model.create_user(name, username, password)
+		self.model.create_user(name, username, password, balance)
 		self.view.restart()
 		sys.exit()
 
 	def login (self):
-		username = self.view.login_username()
-		password = self.view.login_password()
-		self.info_list = self.model.check_login (username, password)
+		self.username = self.view.login_username()
+		self.password = self.view.login_password()
+		self.info_list = self.model.check_login (self.username, self.password)
 		if self.info_list is not None:
+			print ("")
 			print ("Welcome back to the stock trading game!")
+			balance = self.model.get_balance(self.username, self.password)
+			print ("Your current balance is: ", balance, "dollars.")
 		else:
 			self.view.try_again()
 			sys.exit()
-			# need to get this to loop
 
 	def choose_option (self):
 		choice = self.view.choose_option()
@@ -67,8 +68,7 @@ class User():
 			self.choose_option()
 
 	def get_portfolio (self):
-		# get the users name and username and pass it to the check_balance function
-		portfolio = self.model.check_balance('''---''')
+		portfolio = self.model.get_portfolio(self.username, self.password)
 		self.view.print_portfolio(portfolio)
 		self.choose_option()
 
@@ -102,33 +102,10 @@ class Stock():
 	def sell_stocks(self):
 		symbol = self.view.get_symbol()
 		num = self.view.get_num_shares_to_sell()
-		self.model.sell.stock(symbol,user1.info_list[0][0],self.stock_info['Name'],num)
-
-# class Admin():
-
-
-# 	def __init__ (self):
-# 		self.view = View ()
-# 		self.model = Model()
-		
-		
-
-
-# class Run():
-# 	def __init__ (self):
-
-# name='Apple'
-# mystock = Stock(name)
-# myapi = Api(name)
+		self.model.sell_stock(symbol,num,user1.info_list[0][0])
 
 
 user1 = User()
 user1.choice_login()
 stock = Stock()
 user1.choose_option()
-
-# stock.get_company_info()	
-# stock.get_stock_quote()
-# stock.buy_stocks()
-# stock.sell_stocks()
-

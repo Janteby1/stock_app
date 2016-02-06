@@ -7,10 +7,6 @@ connection = sqlite3.connect(db)
 c = connection.cursor()
 
 class Model:
-    # def __init__(self):
-        # self.stock_name=name
-        #self.apiname = 'http://dev.markitondemand.com/MODApis/#doc_lookup'
-
     def search_company(self, company):
         ''' get company information'''
         stock_company = requests.get("http://dev.markitondemand.com/Api/v2/Lookup/json?input=%s" % (company)).json() 
@@ -20,9 +16,9 @@ class Model:
         stock_info = requests.get("http://dev.markitondemand.com/Api/v2/Quote/json?symbol=%s" %(stock)).json()
         return stock_info
 
-    def create_user(self, name, username, password):
+    def create_user(self, name, username, password, balance):
         c.execute("""
-            INSERT INTO users ("name", "username", "password") VALUES (?, ?, ?)""",(name, username, password))
+            INSERT INTO users ("name", "username", "password", "balance") VALUES (?, ?, ?, ?)""",(name, username, password, balance))
         connection.commit()
 
     def print_user(self):
@@ -43,8 +39,13 @@ class Model:
         info_list = c.execute("""
             SELECT * FROM users WHERE username = ? AND password = ?""", (username, password))
         connection.commit()
-        #return info_list.fetchone()
         return(info_list.fetchall()) 
+
+    def get_balance(self, username, password):
+        balance = c.execute("""
+            SELECT balance FROM users WHERE username = ? AND password = ?""", (username, password))
+        connection.commit()
+        return balance.fetchone()
 
     def buy_stock(self,symbol,num,userid):
         "Need to change the value of the balance in the user table then create the stock add the stock to his FK"
@@ -82,8 +83,7 @@ class Model:
         info_list = self.stock_info(self.symbol)
         self.lastprice=info_list["LastPrice"]
         print('Sell price', self.lastprice, ' ', 'user id..', self.userid )
-        total_revenue = int(num) * int(self.lastprice)
-
+        total_revenue = int(self.quantity) * int(self.lastprice)
 
         c.execute(
             """
@@ -121,24 +121,37 @@ class Model:
         connection.commit()
         return revenue
 
-    def get_portfolio(self, name, username):
+    def get_portfolio(self, username, password):
         "first fine user id from his name and username, then use this id to find all the stocks he has"
         portfolio = []
-        c.execute("""
-            SELECT * FROM stock where userid =(SELECT id FROM user WHERE name = ? AND username = ?)"""), (name, username)
-        return portfolio.fetchall() 
+        userid = c.execute("""
+            SELECT id 
+                FROM users 
+                WHERE username = ? AND password = ? 
+                """,
+                (username, password))
+        userid = userid.fetchone()
+
+        portfolio = c.execute("""
+            SELECT *
+                FROM stock
+                WHERE userid = ?
+                """,
+                (userid))
+        return (portfolio.fetchall())
         connection.commit()
 
     def admin_view(self, userid, acttype, balance):
         "Need to select all stocks from all users, ordered by user name"
         pass
 
+
 class Admin():
 
-    def __init__ (self):
-        print("we are here")
+    def __init__(self):
+        pass
 
-    def view_all (self):
+    def view_all(self):
         c.execute(
         """
         SELECT name, balance
@@ -146,11 +159,3 @@ class Admin():
         ORDER BY balance DESC
         """)
         return c.fetchall()
-
-
-
-
-
-
-
-
