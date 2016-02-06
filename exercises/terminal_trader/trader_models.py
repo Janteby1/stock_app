@@ -146,3 +146,16 @@ class Model:
         pass
 
 
+class Admin():
+
+    def __init__(self):
+        pass
+
+    def view_all(self):
+        c.execute(
+        """
+        SELECT name, balance
+        FROM users
+        ORDER BY balance DESC
+        """)
+        return c.fetchall()
