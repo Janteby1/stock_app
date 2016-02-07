@@ -5,16 +5,24 @@ from trader_models import *
 
 class User():
 	def __init__ (self):
-		self.view = View ()
+		self.view = View()
 		self.model = Model()
+		self.admin = Admin()
+
+	def login_admin(self):
+		return_adminlst = self.view.admin_login()
+		self.model.check_login(return_adminlst[0], return_adminlst[1])
+		self.admin.viewall()
 
 	def choice_login (self):
 		self.view.welcome()
 		choice = self.view.choice_login()
 		if choice == "1":
 			self.signup()
-		elif choice == "2":
+		if choice == "2":
 			self.login()
+		if choice == "3":
+			self.login_admin()
 		else:
 			self.choice_login() 
 
@@ -95,6 +103,7 @@ class Stock():
 		symbol = self.view.get_symbol()
 		num = self.view.get_num_shares_to_sell()
 		self.model.sell_stock(symbol,num,user1.info_list[0][0])
+
 
 user1 = User()
 user1.choice_login()
