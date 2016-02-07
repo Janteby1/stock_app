@@ -70,9 +70,8 @@ class Model:
         c.execute("""
             UPDATE users SET balance=balance - ? WHERE id=?""",(total_price_of_shares, self.userid)
         )
-        print ("Your purchase ahs went through")
+        print ("Your purchase has went through")
         connection.commit()
-        connection.close()
     
     def sell_stock(self, symbol,quantity,userid):
         self.symbol= symbol
