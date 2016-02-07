@@ -94,7 +94,10 @@ class Model:
         if available_stock == []:
             print("You do not have this stock")
         else:
-            stock_id, price, on_hand = available_stock
+            stock_id = available_stock, 
+            price = available_stock, 
+            on_hand = available_stock
+            
         if self.quantity > on_hand:
             print("Not enough stock available!")
             return
