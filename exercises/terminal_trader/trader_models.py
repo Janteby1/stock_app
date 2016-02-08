@@ -78,8 +78,8 @@ class Model:
         print('SYMBOL  ',self.symbol)
 
         info_list = self.stock_info(self.symbol)
-        print('self stok info  --',self.stock_info(self.symbol))
-        print('IN MODEL SELL STOCK..',info_list)
+        # print('self stok info  --',self.stock_info(self.symbol))
+        # print('IN MODEL SELL STOCK..',info_list)
         self.lastprice = info_list["LastPrice"]
         print('Sell price', self.lastprice, ' ', 'user id..', self.userid )
         total_revenue = int(self.quantity) * int(self.lastprice)
