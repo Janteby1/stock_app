@@ -1,18 +1,14 @@
 import sys
 import pdb
-from trader_views import *
-from trader_models import *
+from trader_views import View
+from trader_models import Model
+
 
 class User():
 	def __init__ (self):
 		self.view = View()
 		self.model = Model()
-		self.admin = Admin()
-
-	def login_admin(self):
-		return_adminlst = self.view.admin_login()
-		self.model.check_login(return_adminlst[0], return_adminlst[1])
-		self.admin.viewall()
+		self.stock = Stock()
 
 	def choice_login (self):
 		self.view.welcome()
@@ -25,6 +21,17 @@ class User():
 			self.login_admin()
 		else:
 			self.choice_login() 
+
+	def login_admin(self):
+		return_adminlst = self.view.admin_login()
+		result = self.model.check_login(return_adminlst[0], return_adminlst[1])
+		if result != []:
+			all_accounts = self.model.get_top_accounts()
+			self.view.display_all_accounts(all_accounts)
+		else:
+			print("You do not have admin rights")
+			self.view.choice_login()
+
 
 	def signup (self):
 		name = self.view.get_name()
@@ -45,6 +52,7 @@ class User():
 			print ("Welcome back to the stock trading game!")
 			balance = self.model.get_balance(self.username, self.password)
 			print ("Your current balance is: ", balance, "dollars.")
+			self.choose_option()
 		else:
 			self.view.try_again()
 			sys.exit()
@@ -52,12 +60,12 @@ class User():
 	def choose_option (self):
 		choice = self.view.choose_option()
 		if choice == "1":
-			stock.get_company_info()	
-			stock.get_stock_quote()
+			self.stock.get_company_info()	
+			self.stock.get_stock_quote()
 		elif choice == "2":
-			stock.buy_stocks()
+			self.stock.buy_stocks()
 		elif choice == "3":
-			stock.sell_stocks()
+			self.stock.sell_stocks()
 		elif choice == "4":
 			self.get_portfolio()
 		elif choice == "5":
@@ -74,7 +82,7 @@ class User():
 
 class Stock():
 	def __init__ (self):
-		self.view = View ()
+		self.view = View()
 		self.model = Model()
 
 	def get_company_info (self):
@@ -107,5 +115,18 @@ class Stock():
 
 user1 = User()
 user1.choice_login()
-stock = Stock()
-user1.choose_option()
+# stock = Stock()
+#user1.choose_option()
+
+
+
+
+
+
+
+
+
+
+
+
+
