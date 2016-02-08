@@ -16,7 +16,7 @@ class Model:
 
     def stock_info(self, stock):
         stock_info = requests.get("http://dev.markitondemand.com/Api/v2/Quote/json?symbol=%s" %(stock)).json()
-        return stock_info
+        return(stock_info)
 
     def create_user(self, name, username, password, balance):
         c.execute("""
@@ -75,8 +75,11 @@ class Model:
         self.symbol = symbol
         self.quantity = quantity
         self.userid = userid
+        print('SYMBOL  ',self.symbol)
 
         info_list = self.stock_info(self.symbol)
+        print('self stok info  --',self.stock_info(self.symbol))
+        print('IN MODEL SELL STOCK..',info_list)
         self.lastprice = info_list["LastPrice"]
         print('Sell price', self.lastprice, ' ', 'user id..', self.userid )
         total_revenue = int(self.quantity) * int(self.lastprice)
@@ -88,14 +91,15 @@ class Model:
             WHERE stockname = ? AND userid = ?""",
             (self.symbol, self.userid))
         available_stock = c.fetchall()
+        print('available stock.....',available_stock)
         if available_stock == []:
             print("You do not have this stock")
         else:
-            stock_id = available_stock, 
-            price = available_stock, 
-            on_hand = available_stock
+            stock_id = available_stock[0][0]
+            price = available_stock[0][1]
+            on_hand = available_stock[0][2]
             
-        if self.quantity > on_hand:
+        if int(self.quantity) > int(on_hand):
             print("Not enough stock available!")
             return
 
@@ -104,10 +108,10 @@ class Model:
             UPDATE stock
             SET num = num - ?
             WHERE id = ?""",
-            (self.quanity, stock_id))
+            (self.quantity, stock_id))
         connection.commit()
 
-        revenue = price * self.quantity
+        revenue = int(price) * int(self.quantity)
         print("Stock sell sucessesful."
               "You have gained {}".format(revenue))
 
