@@ -168,9 +168,9 @@ class View ():
 		for i in range (0,length):
 			print ("")
 			# print ("User ID: ", stock_info['Name'])
-			print ("Stock Symbol: ", portfolio[i][1])
-			print ("Buy Price: ", portfolio[i][2])
-			print ("Number of shares: ", portfolio[i][3])
-			print ("User ID: ", portfolio[i][4])
+			print ("Stock Symbol: ", portfolio[i][0])
+			print ("Buy Price: ", portfolio[i][1])
+			print ("Number of shares: ", portfolio[i][2])
+			print ("User ID: ", portfolio[i][3])
 			print ("")
 
