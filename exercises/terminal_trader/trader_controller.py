@@ -1,5 +1,5 @@
 import sys
-import pdb
+import pudb
 from trader_views import View
 from trader_models import Model
 
@@ -14,11 +14,11 @@ class User():
 		self.view.welcome()
 		choice = self.view.choice_login()
 		if choice == "1":
-			self.signup()
+			return self.signup()
 		if choice == "2":
-			self.login()
+			return self.login()
 		if choice == "3":
-			self.login_admin()
+			return self.login_admin()
 		else:
 			self.choice_login() 
 
@@ -44,6 +44,7 @@ class User():
 		sys.exit()
 
 	def login (self):
+		# pu.db
 		self.username = self.view.login_username()
 		self.password = self.view.login_password()
 		self.info_list = self.model.check_login (self.username, self.password)

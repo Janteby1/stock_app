@@ -68,8 +68,8 @@ class Model:
             UPDATE users SET balance=balance - ? WHERE id=?""",(total_price_of_shares, userid)
         )
         print ("Your purchase has gone through")
+
         connection.commit()
-        connection.close()
     
     def sell_stock(self, symbol,quantity,userid):
         self.symbol = symbol
@@ -91,7 +91,10 @@ class Model:
         if available_stock == []:
             print("You do not have this stock")
         else:
-            stock_id, price, on_hand = available_stock
+            stock_id = available_stock, 
+            price = available_stock, 
+            on_hand = available_stock
+            
         if self.quantity > on_hand:
             print("Not enough stock available!")
             return
@@ -129,13 +132,14 @@ class Model:
         userid = userid.fetchone()
 
         portfolio = c.execute("""
-            SELECT *
+            SELECT stockName, buyPrice, num, userid
                 FROM stock
                 WHERE userid = ?
                 """,
                 (userid))
-        return (portfolio.fetchall())
         connection.commit()
+
+        return portfolio.fetchall()
 
     def get_top_accounts(self):
         """
