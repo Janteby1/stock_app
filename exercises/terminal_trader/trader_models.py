@@ -2,9 +2,11 @@ import sqlite3
 import requests
 import pdb
 
+
 db = "stocks.db"
 connection = sqlite3.connect(db)
 c = connection.cursor()
+
 
 class Model:
     def search_company(self, company):
@@ -23,7 +25,7 @@ class Model:
 
     def print_user(self):
         cursor = connection.execute("SELECT name, username, password, permission FROM users")
-        i =0
+        i = 0
         while i < 1:
             for row in cursor:
                 print (" ")
@@ -35,7 +37,6 @@ class Model:
             i +=1
 
     def check_login(self, username, password):
-        info_list = []
         info_list = c.execute("""
             SELECT * FROM users WHERE username = ? AND password = ?""", (username, password))
         connection.commit()
@@ -49,38 +50,34 @@ class Model:
 
     def buy_stock(self,symbol,num,userid):
         "Need to change the value of the balance in the user table then create the stock add the stock to his FK"
-        self.symbol=symbol
-        self.num=num
-        self.userid=userid
 
-        info_list =[]
         info_list = self.stock_info(symbol)
 
         self.lastprice=info_list["LastPrice"]
-        print('buy Price  ',self.lastprice, '  ','user id ..',self.userid )
+        print('buy Price  ',self.lastprice, '  ','user id ..',userid )
 
         total_price_of_shares = int(num) * int(self.lastprice)
 
         c.execute("""
             INSERT INTO stock ("stockName","buyPrice","num","userid") VALUES(?,?,?,?)
         
-        """,(self.symbol,self.lastprice,self.num,self.userid)
+        """,(symbol,self.lastprice,num,userid)
         )
 
         c.execute("""
-            UPDATE users SET balance=balance - ? WHERE id=?""",(total_price_of_shares, self.userid)
+            UPDATE users SET balance=balance - ? WHERE id=?""",(total_price_of_shares, userid)
         )
-        print ("Your purchase has went through")
+        print ("Your purchase has gone through")
+
         connection.commit()
     
     def sell_stock(self, symbol,quantity,userid):
-        self.symbol= symbol
-        self.quantity=quantity
-        self.userid=userid
+        self.symbol = symbol
+        self.quantity = quantity
+        self.userid = userid
 
-        info_list = []
         info_list = self.stock_info(self.symbol)
-        self.lastprice=info_list["LastPrice"]
+        self.lastprice = info_list["LastPrice"]
         print('Sell price', self.lastprice, ' ', 'user id..', self.userid )
         total_revenue = int(self.quantity) * int(self.lastprice)
 
@@ -135,29 +132,24 @@ class Model:
         userid = userid.fetchone()
 
         portfolio = c.execute("""
-            SELECT *
+            SELECT stockName, buyPrice, num, userid
                 FROM stock
                 WHERE userid = ?
                 """,
                 (userid))
-        return (portfolio.fetchall())
         connection.commit()
 
-    def admin_view(self, userid, acttype, balance):
-        "Need to select all stocks from all users, ordered by user name"
-        pass
+        return portfolio.fetchall()
 
-
-class Admin():
-
-    def __init__(self):
-        pass
-
-    def view_all(self):
+    def get_top_accounts(self):
+        """
+        Retrieve top accounts from database.
+        """
         c.execute(
         """
         SELECT name, balance
         FROM users
+        WHERE name != "admin"
         ORDER BY balance DESC
         """)
         return c.fetchall()
