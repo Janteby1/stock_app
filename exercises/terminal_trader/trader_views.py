@@ -3,7 +3,7 @@ import pdb
 
 class View ():
 
-	def welcome (self):
+	def welcome(self):
 		print ("")
 		print ("Welcome to the trading game app!")
 		print ("This app allows you to search for a company and get information back about it.")
@@ -14,29 +14,29 @@ class View ():
 		print ("")
 
 	def choice_login(self):
-		choice = input ("Do you want to sign up [1] log in [2] or log in as a admin [3]?" )
+		choice = input ("Do you want to sign up [1] log in [2] or log in as an admin [3]?" )
 		return choice
 
 	def get_name (self):
 		print ("")
 		while True:
 			name = input ("Welcome! Please enter your name: ")
-			if name.isalpha() == True:
+			if name.isalpha():
 				break
 			else:
 				self.get_name()
 		return name
 
 	def company_info(self,name,exchange,symbol):
-		self.name=name
-		self.exchange=exchange
+		self.name = name
+		self.exchange = exchange
 		self.symbol = symbol
 		print("")
 		print('Name of the company: {}'.format(self.name))
 		print('Exchange: {}'.format(self.exchange))
 		print('Symbol: {}'.format(self.symbol))
 
-	def get_username (self):
+	def get_username(self):
 		print ("")
 		while True:
 			username = input ("Please enter a username: ")
@@ -150,18 +150,27 @@ class View ():
 		num = input("How many shares would you like to sell? ")
 		return(num)
 
+	def display_all_accounts(self, account_data):
+		"""
+		Prints all account data in a vertical list.
+		"""
+		print('Name - Amount')
+		for pair in account_data:
+			name, amount = pair
+			print("{} - ${}".format(name, amount))
+
 	def print_portfolio (self, portfolio):
+		print ("Portfolio: ", portfolio)
+
 		length = len(portfolio)
 		print ("")
 		print ("Your PortfolioView...")
 		for i in range (0,length):
 			print ("")
 			# print ("User ID: ", stock_info['Name'])
-			print ("Stock Symbol: ", portfolio[i][1])
-			print ("Buy Price: ", portfolio[i][2])
-			print ("Number of shares: ", portfolio[i][3])
-			print ("User ID: ", portfolio[i][4])
+			print ("Stock Symbol: ", portfolio[i][0])
+			print ("Buy Price: ", portfolio[i][1])
+			print ("Number of shares: ", portfolio[i][2])
+			print ("User ID: ", portfolio[i][3])
 			print ("")
-
-
 
